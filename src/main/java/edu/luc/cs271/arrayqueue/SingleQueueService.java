@@ -24,8 +24,8 @@ public class SingleQueueService {
                 String current;
 		int remaining;
                 synchronized (lock) {
-                  current = queue.poll(); // TODO try to take next name from queue
-		              remaining = queue.size(); // TODO determine resulting size of queue
+                  current = queue.poll(); // Done  try to take next name from queue
+		              remaining = queue.size(); //  Done determine resulting size of queue
                 }
                 if (current == null) {
                   System.out.println("no one waiting");
