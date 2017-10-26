@@ -1,7 +1,6 @@
 package edu.luc.cs271.arrayqueue;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FixedArrayQueue<E> implements SimpleQueue<E> {
@@ -16,7 +15,9 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
 
   private final E[] data;
 
-  // TODO why do we need an explicit constructor?
+  private List<E> dataList;
+
+  // Done why do we need an explicit constructor?
 
   @SuppressWarnings("unchecked")
   public FixedArrayQueue(final int capacity) {
@@ -29,32 +30,31 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
 
   @Override
   public boolean offer(final E obj) {
-    //not done yet 
-   if(this.size<this.capacity) {
-        this.data[this.size] = obj;
-        this.size++;
-    return true;
-  }
-  else {
+    // Done
+    if (size < capacity) {
+      size++;
+      rear = (rear + 1) % capacity;
+      data[rear] = obj;
+      return true;
+    } else {
       return false;
     }
-}
+  }
 
   @Override
   public E peek() {
-    //Done 
-    if(this.size == 0) {
+    // Done
+    if (size == 0) {
       return null;
+    } else {
+      return data[front];
     }
-    else {
-      return this.data[this.front];
-     }
- }
+  }
 
   @Override
-   public E poll() {
-     //Done
-     if (this.size == 0) {
+  public E poll() {
+    // Done
+    if (size == 0) {
       return null;
     } else {
       E result = data[front];
@@ -62,16 +62,16 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
       size--;
       return result;
     }
-}
+  }
+
   @Override
   public boolean isEmpty() {
-    //done
-   if (this.size == 0) {
-        return true;
+    // Done
+    if (size == 0) {
+      return true;
+    } else {
+      return false;
     }
-    else {
-        return false;
-}
   }
 
   @Override
@@ -80,14 +80,14 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
   }
 
   @Override
-    public List<E> asList() {
-      // Done
-    List<E> list = new ArrayList<>();
-    for(int i = 0; i < this.size; i++)
-    {
-      list.add(this.data[i]);
+  public List<E> asList() {
+    // Done
+    dataList = new ArrayList<>(capacity);
+    while (!isEmpty()) {
+      dataList.add(data[front]);
+      front = (front + 1) % capacity;
+      size--;
     }
-    return list;
+    return dataList;
   }
-  
 }
