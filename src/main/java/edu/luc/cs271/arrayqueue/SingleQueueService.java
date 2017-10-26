@@ -22,10 +22,10 @@ public class SingleQueueService {
             () -> {
               while (true) {
                 String current;
-		int remaining;
+                int remaining;
                 synchronized (lock) {
                   current = queue.poll(); // Done  try to take next name from queue
-		              remaining = queue.size(); //  Done determine resulting size of queue
+                  remaining = queue.size(); //  Done determine resulting size of queue
                 }
                 if (current == null) {
                   System.out.println("no one waiting");
@@ -49,7 +49,7 @@ public class SingleQueueService {
       final String name = input.nextLine();
       boolean result;
       synchronized (lock) {
-       result = queue.offer(name); // Done try to add this name tothe queue
+        result = queue.offer(name); // Done try to add this name tothe queue
       }
       if (result) {
         System.out.println(name + " has joined the queue");
